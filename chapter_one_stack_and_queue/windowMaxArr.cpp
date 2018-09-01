@@ -14,28 +14,20 @@ vector<int> windowsMax(const vector<int> &nums,const int k){
 	deque<int> window;
 	//this loop can be merge into the next loop, but I do not konw which way is more efficient
 	for(int i = 0; i < k; ++i){
-		if(window.empty() || nums[window.back()] >= nums[i]){
-			window.push_back(i);
-		}else{
-			while(!window.empty() && nums[window.back()] < nums[i]){
-				window.pop_back();
-			}
-			window.push_back(i);
+		while(!window.empty() && nums[window.back()] < nums[i]){
+			window.pop_back();
 		}
+		window.push_back(i);
 	}
 	for(int i = k; i < size; ++i){
 		ans.push_back(nums[window.front()]);
 		if(window.front() == i - k){
 			window.pop_front();
 		}
-		if(window.empty() || nums[window.back()] >= nums[i]){
-			window.push_back(i);
-		}else{
-			while(!window.empty() && nums[window.back()] < nums[i]){
-				window.pop_back();
-			}
-			window.push_back(i);
-		}	
+		while(!window.empty() && nums[window.back()] < nums[i]){
+			window.pop_back();
+		}
+		window.push_back(i);	
 	}
 	return ans;
 }
@@ -49,28 +41,20 @@ vector<int> windowsMax2(const vector<int> &nums,const int k){
 
 	deque<int> window;
 	for(int i = 0; i < k; ++i){
-		if(window.empty() || window.back() >= nums[i]){
-			window.push_back(nums[i]);
-		}else{
-			while(!window.empty() && window.back() < nums[i]){
-				window.pop_back();
-			}
-			window.push_back(nums[i]);
+		while(!window.empty() && window.back() < nums[i]){
+			window.pop_back();
 		}
+		window.push_back(nums[i]);
 	}
 	for(int i = k; i < size; ++i){
 		ans.push_back(window.front());
 		if(window.front() == nums[i - k]){
 			window.pop_front();
 		}
-		if(window.empty() || window.back() >= nums[i]){
-			window.push_back(nums[i]);
-		}else{
-			while(!window.empty() && window.back() < nums[i]){
-				window.pop_back();
-			}
-			window.push_back(nums[i]);
-		}	
+		while(!window.empty() && window.back() < nums[i]){
+			window.pop_back();
+		}
+		window.push_back(nums[i]);
 	}
 	return ans;
 }
