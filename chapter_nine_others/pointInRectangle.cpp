@@ -17,7 +17,11 @@ int aXb(Point a, Point b,Point c){
 	return ((b.x - a.x)*(c.y - b.y)-(c.x - b.x)*(b.y - a.y));
 }
 bool inRectangle(Rectangle rec,Point p){
-	return (aXb(p,rec.up,rec.left) * aXb(p,rec.left,rec.down)) > 0 && (aXb(p,rec.down,rec.right) * aXb(p,rec.right,rec.up)) > 0;
+	int a = aXb(p,rec.up,rec.left);
+	int b = aXb(p,rec.left,rec.down);
+	int c = aXb(p,rec.down,rec.right);
+	int d = aXb(p,rec.right,rec.up);
+	return (a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0);
 }
 
 int main(int argc, char const *argv[])
