@@ -6,7 +6,6 @@
 using namespace std;
 
 unsigned int rand(unsigned int n){
-	srand(time(NULL));
 	return rand()%n;
 }
 
@@ -22,7 +21,6 @@ vector<int> getNumsRand(const unsigned int k, const unsigned int max){
 
 	for(size_t i = k; i < max; ++i){
 		if(rand(i+1) < k){
-			cout << rand(k) << endl;
 			ans[rand(k)] = i + 1;
 		}
 	}
@@ -33,6 +31,7 @@ vector<int> getNumsRand(const unsigned int k, const unsigned int max){
 
 int main(int argc, char const *argv[])
 {
+	srand(time(NULL));
 	vector<int> ans = getNumsRand(10,1000);
 	for(int i : ans){
 		cout << i << endl;
